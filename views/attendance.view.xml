@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Attendance Model -->
+
+
+    <!-- Attendance Fields -->
+    <record id="view_form_coaching_attendance" model="ir.ui.view">
+        <field name="name">coaching.attendance.form</field>
+        <field name="model">coaching.attendance</field>
+        <field name="arch" type="xml">
+            <form>
+
+                <header>
+                    <button id="button_confirm" name="action_confirm" string="Confirm" class="btn-primary" type="object" states="draft" confirm="Are you okay to go with these changes"/>
+                    <button id="button_open" name="action_open" type="object" string="In Progress" class="btn-primary" states="open"/>
+                    <button id="button_draft" name="action_draft" type="object" string="Draft" class="btn-primary" confirm="Are you sure you want to change the state to Draft"/>
+                    <button id="button_delete" name="action_delete" type="object" string="Deleted" states="draft,open" confirm="Are you sure you want to delete this record"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,open,confirm"/>
+                </header> 
+                <sheet>
+                        <group>
+                            <group>
+                                <field name="date"/>
+                                <field name="class_id"/>
+                                <field name="teacher_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Attendance Lines">
+                                <field name="attendance_lines" widget="one2many_list">
+                                    <tree editable="bottom">
+                                        <field name="student_id"/>
+                                        <field name="is_present"/>
+                                        <field name="is_absent"/>
+                                        <field name="is_late"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+    <record id="view_coaching_attendance_tree" model="ir.ui.view">
+        <field name="name">coaching.attendance.tree</field>
+        <field name="model">coaching.attendance</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date"/>
+                <field name="class_id"/>
+                <field name="teacher_id"/>
+                <field name="state"/>
+                <!-- <field name="student_ids" widget="many2many_tags" options="{'no_create': True}"/> -->
+                <!-- Add more fields as needed -->
+                
+            </tree>
+        </field>
+    </record>
+    
+    <record id="coaching_attendance_action" model="ir.actions.act_window">
+        <field name="name">Attendence</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">coaching.attendance</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Mark Your first Attendence!
+            </p>
+        </field>
+    </record>
+    <menuitem id="coaching_attendance_root" name="Attendence" parent="coaching_root" action="coaching_attendance_action" sequence="40"/>
+    
+    
+    </odoo>

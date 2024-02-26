@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="coaching_assignment_form" model="ir.ui.view">
+        <field name="name">coaching.assignment.form</field>
+        <field name="model">coaching.assignment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                        <field name="name"/>
+                        <field name="course_id"/>
+                        <field name="class_id" on_change="1"/>
+                        </group>
+                        <group>
+                        <!-- <field name="student_id" widget="many2many_tags"/> -->
+                        <field name="deadline"/>
+                        <field name="assignment_file"/>
+                        <field name="passing_marks"/>
+                        <field name="description" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Student Lines">
+                            <field name="student_lines" widget="one2many_list">
+                                <tree editable="bottom">
+                                    <field name="student_id"/>
+                                    <field name="solve_file"/>
+                                    <field name="max_marks"/>
+                                    <field name="passing_marks"/>
+                                    <field name="is_published"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="coaching_assignment_tree" model="ir.ui.view">
+        <field name="name">coaching.assignment.tree</field>
+        <field name="model">coaching.assignment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="class_id"/>
+                <field name="course_id"/>
+                <field name="deadline"/>
+
+                <!-- <field name="is_published"/> -->
+            </tree>
+        </field>
+    </record>
+    <record id="coaching_assignment_action" model="ir.actions.act_window">
+        <field name="name">Assignments</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">coaching.assignment</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add First Assignment!
+            </p>
+        </field>
+    </record>
+</odoo>

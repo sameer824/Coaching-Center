@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding="utf-8"?>
+<odoo>
+    <record id="student_coaching_form" model="ir.ui.view">
+        <field name="name">student.coaching.form</field>
+        <field name="model">student.coaching</field>
+        <field name="arch" type="xml">
+
+            <form>
+                <!-- define the header and status bar and the button that i used  -->
+                <header>
+                    <button id="button_confirm" name="action_confirm" string="Confirm" class="btn-primary" type="object" states="draft" confirm="Are you okay to go with these changes"/>
+                    <button id="button_open" name="action_open" type="object" string="In Progress" class="btn-primary" states="open"/>
+                    <button id="button_draft" name="action_draft" type="object" string="Draft" class="btn-primary" confirm="Are you sure you want to change the state to Draft"/>
+                    <button id="button_delete" name="action_delete" type="object" string="Deleted" states="draft,open" confirm="Are you sure you want to delete this record"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,open,confirm"/>
+                </header> 
+                <sheet>    
+                    <group>
+                        <h1 style="text-align: center;"  >Mr. Developer Coaching</h1>
+                    </group>        
+                    <field name="student_image" widget="image" class="oe_avatar" />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="student_id" />
+                        </h1>
+                        </div>
+                    <div>
+                    <group>
+                        <!--  Student Information -->
+                        <group>
+                            <field name="name"/>
+                            <field name="dob"/>
+                            <field name="s_cnic"/>
+                            <field name="country"/>
+                            <field name="city"/>
+                            <field name="address"/>
+                            <field name ="s_gender"/>
+                        </group>
+                        <group>
+                            <field name="f_name"/>
+                            <field name="s_bloodgroup"/>
+                            <field name="s_phone"/>
+                            <field name="s_email"/>
+                            <field name="duration"/>
+                            <field name="course_id" widget="many2many_tags" options="{'no_create': True}"/>
+                            <field name="admission_date"/>
+                        </group>  
+                        <group>
+                            <!-- Emergency Contact Information -->
+                            <field name="emergency_contact_name"/>
+                            <field name="emergency_contact_phone"/>
+                            <!-- Educational Background -->
+                            <field name="educational_background"/>
+                        </group>
+                        <group>
+                            <!-- Payment Information -->
+                            <field name="payment_method"/>
+                            <field name="payment_status"/>
+                            <field name="fee_details"/>
+                            <!-- Medical Information -->
+                            <field name="medical_information"/>
+                            <!-- Additional Notes -->
+                            <field name="additional_notes"/>
+                        </group>
+                    </group>
+                </div>
+                <h1>Guardian Details      <field name="guardian_image" widget="image" class="oe_avatar" /></h1>
+                    <div>
+                    <group>
+                        
+                        <group> 
+                            <field name="g_name"/>
+                            <field name="g_cnic"/>
+                            <field name="g_relation"/>    
+                            <field name="g_contact"/>
+                            <field name ="g_gender"/>
+                        </group>
+                        <group>
+                            <field name="g_dob"/>
+                            <field name="g_email"/>
+                            <field name="g_address"/>
+                            <field name="g_blood"/>
+                                <!-- Terms and Conditions -->
+                                
+                                <field name="terms_and_conditions_accepted"/>
+                            </group>    
+                        
+                                <footer>
+                                    <button string="Submit" type="object" class="btn-primary" name="action_submit" />
+                                    <button string="Reset" class="oe_highlight" type="object" name="action_reset" special="cancel"/>
+                                </footer>
+                                
+                            
+                    </group>
+                    </div>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="student_coaching_tree_view" model="ir.ui.view">
+        <field name="name">student.coaching.tree</field>
+        <field name="model">student.coaching</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="student_id"/>
+                <field name="name"/>
+                <!-- <field name="s_cnic"/>
+                <field name="s_date_of_birth"/>
+                <field name="country"/>
+                <field name="city"/>
+                <field name="address"/>
+                <field name="s_bloodgroup"/>
+                <field name="f_name"/>
+                <field name="s_phone"/> -->
+                <field name="s_email"/>
+                <field name="duration"/>
+                <field name="course_id"/>
+                <field name ="admission_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="student_coaching_search_view" model="ir.ui.view">
+        <field name="name">student.coaching.search</field>
+        <field name="model">student.coaching</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Student Name"/>
+                <field name="country" string="Country"/>
+                <field name="city" string="City"/>
+                <field name="f_name"  string="Father Name"/>
+                <field name="course_id" string="Course Name"/>
+                <separator/>
+                <filter string="Sameer Ahmad" name="name" domain="[('name', '=', 'name')]"/>
+                <filter string="Odoo Developer" name="course_id" domain="[('course_id', '=', 'course_id')]"/>
+                <group string="Group By">
+                    <filter string="Student Name" name="student_name" context="{'group_by': 'name', 'search_default_student_name': 1}"/>
+                    <filter string="Course Name" name="student_course" context="{'group_by': 'course_id', 'search_default_student_course': 1}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="student_coaching_kanban_view" model="ir.ui.view">
+        <field name="name">student.coaching.kanban</field>
+        <field name="model">student.coaching</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="f_name"/>
+                <field name="duration"/>
+                <field name="course_id"/>
+                <field name="admission_date"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <div class="o_kanban_image_fill_left d-none d-md-block">
+                                <field name="student_image" widget="image" class="oe_avatar" style="max-width: 50%; position: absolute; top: 0; left: 0;"/>
+                            </div>
+                    
+                
+                            <div class="oe_kanban_details d-flex flex-column justify-content-between">
+                                <div>
+                                    <strong class="o_kanban_record_title oe_partner_heading">
+                                        <!-- Student Record   -->
+                                            
+                                    </strong>
+                                    <ul>
+                                        <li>
+                                            <li>Reg_no:<field name="student_id" /></li>
+                                            <li>Name:<field name="name"/></li>
+                                            <li>Course:<field name="course_id"/></li>
+                                            <li>Phone:<field name="s_phone"/></li>
+                                            <li>Admission Date:<field name="admission_date"/></li>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left"/>
+                                    <div class="oe_kanban_bottom_right"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="student_coaching_action" model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">student.coaching</field>  
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add your First Student!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="coaching_root" name="Mr Developer Coaching" sequence="10"/>
+    <menuitem id="coaching_dashboard_root" name="Dashboard" parent="coaching_root" action="coaching_dashboard_action" sequence="10"/>
+    <menuitem id="students_coaching_root" name="Students" parent="coaching_root" action="student_coaching_action" sequence="20"/>
+</odoo>

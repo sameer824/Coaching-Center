@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Teacher Form View -->
+        <record id="view_coaching_center_teacher_form" model="ir.ui.view">
+            <field name="name">coaching.center.teacher.form</field>
+            <field name="model">coaching.center.teachers</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button id="button_draft" name="action_draft" type="object" string="Draft" class="btn-primary" confirm="Are you sure you want to change the state to Draft"/>
+                        <button id="button_open" name="action_open" type="object" string="In Progress" class="btn-primary" states="open"/>
+                        <button id="button_confirm" name="action_confirm" string="Confirm" class="btn-primary" type="object" states="draft" confirm="Are you okay to go with these changes"/>
+                        <button id="button_delete" name="action_delete" type="object" string="Deleted" states="draft,open" confirm="Are you sure you want to delete this record"/>
+                            <!-- ... other buttons ... -->
+                            <field name="state" widget="statusbar" statusbar_visible="draft,open,confirm"/>
+                        
+                    </header>
+                    <sheet>
+                        <group>
+                            <h1 style="text-align: left;" >Teacher Details</h1>
+                        </group>
+                        <field name="t_image" widget="image" class="oe_avatar" />
+                        <group>
+                            <group>
+                                
+                                <field name="teachers_id"/>
+                                <field name="name"/>
+                                <field name="email"/>
+                                <field name="phone"/>
+                                <field name="address"/>
+                                <field name="date_of_birth"/>
+                            </group>
+                            <group>
+                                <field name="gender"/>
+                                <field name="qualification"/>
+                                <field name="experience_years"/>
+                                <field name="hourly_rate"/>
+                                <field name="availability"/>
+                                <field name ="basic_salary"/>
+                            </group>
+                            <notebook>
+                                <page string="Subjects Taught" name ="subject">
+                                    <group>
+                                        <field name="subjects_taught" widget="many2many_tags"/>
+                                    </group>
+                                </page>
+                                <page string="Teaching Days" name ="teaching">
+                                    <group>
+                                        <field name="teaching_days" widget="many2many_tags"/>
+                                    </group>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids"/>
+                            <field name="activity_ids"/>
+                            <field name="message_ids"/>
+                        </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Teacher Tree View -->
+        <record id="view_coaching_center_teacher_tree" model="ir.ui.view">
+            <field name="name">coaching.center.teacher.tree</field>
+            <field name="model">coaching.center.teachers</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="teachers_id"/>
+                    <field name="name"/>
+                    <field name="phone"/>
+                    <field name="qualification"/>
+                    <field name="experience_years"/>
+                    <field name="hourly_rate"/>
+                    <field name="teaching_days"/>
+                    <field name ="basic_salary"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Teacher Kanban View -->
+        <record id="view_coaching_center_teacher_kanban" model="ir.ui.view">
+            <field name="name">coaching.center.teacher.kanban</field>
+            <field name="model">coaching.center.teachers</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="qualification"/>
+                    <field name="experience_years"/>
+                    <field name="availability"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                                <div class="o_kanban_image_fill_left d-none d-md-block">
+                                    <field name="t_image" widget="image" class="oe_avatar" style="max-width: 50%; position: absolute; top: 0; left: 0;"/>
+                                </div>
+                                <div class="oe_kanban_details d-flex flex-column justify-content-between">
+                                    <div>
+                                        <strong class="o_kanban_record_title oe_partner_heading">
+                                            <!-- Student Record -->
+                                        </strong>
+                                        <ul>
+                                            <li>Name: <field name="name"/></li>
+                                            <li>Phone: <field name="phone"/></li>
+                                            <li>Qualification: <field name="qualification"/></li>
+                                            <li>Experience: <field name="experience_years"/></li>
+                                            <li>Available: <field name="availability"/></li>
+                                        </ul>
+                                    </div>
+                                    <div class="o_kanban_record_bottom">
+                                        <div class="oe_kanban_bottom_left"/>
+                                        <div class="oe_kanban_bottom_right"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Action for Teachers -->
+        <record id="action_coaching_center_teachers" model="ir.actions.act_window">
+            <field name="name">Teachers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">coaching.center.teachers</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face"> 
+                    Add First Teacher!
+                </p>
+            </field>
+        </record>
+
+        <!-- Menuitem for Teachers -->
+
+        <menuitem id="coaching_teachers_root" name="Teachers" parent="coaching_root" sequence="60"/>
+        <menuitem id="menu_teachers" name="Teachers" parent="coaching_teachers_root" action="action_coaching_center_teachers" sequence="60"/>
+        <menuitem id="menu_salary" name="Teachers Salary" parent="coaching_teachers_root" action="action_teachers_salary" sequence="70"/>
+    </data>
+</odoo>

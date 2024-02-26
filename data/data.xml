@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_student_coaching" model="ir.sequence">
+            <field name="name">Student Sequence</field>
+            <field name="code">student.coaching</field>
+            <field name="prefix">ST_</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_coaching_center_teachers" model="ir.sequence">
+            <field name="name">Teachers Sequence</field>
+            <field name="code">coaching.center.teachers</field>
+            <field name="prefix">T_</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

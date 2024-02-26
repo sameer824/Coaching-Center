@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_teachers_salary_form" model="ir.ui.view">
+        <field name="name">teachers.salary.form</field>
+        <field name="model">teachers.salary</field>
+        <field name="arch" type="xml">
+            <form>
+                <!-- define the header and status bar and the button that i used  -->
+                <header>
+                    <button id="button_confirm" name="action_confirm" string="Confirm" class="btn-primary" type="object" states="draft" confirm="Are you okay to go with these changes"/>
+                    <button id="button_open" name="action_open" type="object" string="In Progress" class="btn-primary" states="open"/>
+                    <button id="button_draft" name="action_draft" type="object" string="Draft" class="btn-primary" confirm="Are you sure you want to change the state to Draft"/>
+                    <button id="button_delete" name="action_delete" type="object" string="Deleted" states="draft,open" confirm="Are you sure you want to delete this record"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,open,confirm"/>
+                </header> 
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="teacher_id"/>
+                            <field name="salary_month"/>
+                            <field name="basic_salary"/>
+                        </group>
+                        <group>
+                            <field name="bonuses"/>
+                            <field name="deductions"/>
+                            <field name="net_salary" />
+                        </group>
+                        <notebook>
+                            <page string="Subjects Taught" name ="subject">
+
+                                <group>
+                                    <field name ="subjects_id" widget="many2many_tags" options="{'no_create': True}" />
+                                </group>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+
+            </form>
+        </field>
+    </record>
+    <record id="view_teachers_salary_tree" model="ir.ui.view">
+        <field name="name">teachers.salary.tree</field>
+        <field name="model">teachers.salary</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="teacher_id"/>
+                <field name ="subjects_id"/>
+                <field name="salary_month"/>
+                <field name="basic_salary"/>
+                <field name="bonuses"/>
+                <field name="deductions"/>
+                <field name="net_salary"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_teachers_salary_kanban" model="ir.ui.view">
+        <field name="name">teachers.salary.kanban</field>
+        <field name="model">teachers.salary</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                    
+                
+                            <div class="oe_kanban_details d-flex flex-column justify-content-between">
+                                <div>
+                                    <strong class="o_kanban_record_title oe_partner_heading">
+                                        <!-- Student Record   -->
+                                            
+                                    </strong>
+                                    <ul>
+                                        <li>
+                                            <li>Teacher:<field name="teacher_id"/></li>
+                                            <li>Monthly_Salary:<field name="salary_month"/></li>
+                                            <li>Bonuses:<field name="bonuses"/></li>
+                                            <li>Net_Salary:<field name="net_salary"/></li>
+                                            
+                                        </li>
+
+                                    </ul>
+                                </div>
+                
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left"/>
+                                    <div class="oe_kanban_bottom_right"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+
+                <!-- Define kanban view fields here if needed -->
+            </kanban>
+        </field>
+    </record>
+
+    <!-- salary view code -->
+    <record id="action_teachers_salary" model="ir.actions.act_window">
+        <field name="name">Salery</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">teachers.salary</field>
+        <field name="view_mode">tree,kanban,form</field> 
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add First Teacher Salary!
+            </p>
+        </field>
+    </record>
+    
+    <!-- <menuitem id="menu_teachers" name="Teachers " parent="coaching_root" action="action_coaching_center_teachers" sequence="40"/> -->
+    <!-- <menuitem id="menu_salary" name="Teachers Salary" parent="coaching_root" action="action_teachers_salary" sequence="50"/> -->
+    
+</odoo>

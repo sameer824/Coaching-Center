@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding="utf-8"?>
+<odoo>
+    <record id="view_classes_tree" model="ir.ui.view">
+        <field name="name">classes.tree</field>
+        <field name="model">classes</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="class_code"/>
+                <field name="name"/>
+                <field name="teachers"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="duration"/>
+                
+                <field name="max_capacity"/>
+                <field name="class_level"/>
+                <field name="location"/>
+                <field name="active"/>
+                <!-- Add more fields as needed -->
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_classes_form" model="ir.ui.view">
+        <field name="name">classes.form</field>
+        <field name="model">classes</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="class_code"/>
+                            <field name="name"/>
+                            <field name="teachers"/>
+                            <field name="start_date"/>
+                            <field name="duration"/>
+                            <field name="location"/>
+                        </group>
+                        <group>
+                            <field name="course_id"/>
+                            <field name="class_level"/>
+                            <field name="active"/>
+                            <field name="end_date"/>
+                            <field name="max_capacity"/>
+                            <!-- Add more fields as needed -->
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Students">
+                        <group>
+                            <field name="student_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                            </group> 
+                        </page>
+                        <page string="Syllabus Links">
+                        <group>
+                            <field name="syllabus_link" widget="many2many_tags" options="{'no_create': True}"/>
+                            </group> 
+                        </page>
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+<record id="classes_action" model="ir.actions.act_window">
+    <field name="name">Classes</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">classes</field>
+    <field name="view_mode">tree,kanban,form</field>
+    <field name="context">{}</field>
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+            Add your First Class!
+        </p>
+    </field>
+</record>
+<!-- <menuitem id="classes_root" name="Classes" parent="coaching_root" action="classes_action" sequence="20"/> -->
+
+
+</odoo>

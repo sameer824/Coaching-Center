@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_student_coaching,access.student.coaching,model_student_coaching,,1,1,1,1
+access_coaching_center_teachers,access.coaching.center.teachers,model_coaching_center_teachers,,1,1,1,1
+access_teachers_salary,access.teachers.salary,model_teachers_salary,,1,1,1,1
+access_coaching_dashboard,access.coaching.dashboard,model_coaching_dashboard,,1,1,1,1
+access_coaching_quiz,access.coaching.quiz,model_coaching_quiz,,1,1,1,1
+access_coaching_quiz_line,access.coaching.quiz.line,model_coaching_quiz_line,,1,1,1,1
+access_coaching_courses,access.coaching.courses,model_coaching_courses,,1,1,1,1
+access_coaching_attendance,access.coaching.attendance,model_coaching_attendance,,1,1,1,1
+access_coaching_attendance_line,access.coaching.attendance.line,model_coaching_attendance_line,,1,1,1,1
+access_coaching_assignment,access.coaching.assignment,model_coaching_assignment,,1,1,1,1
+access_coaching_students,access.coaching.students,model_coaching_students,,1,1,1,1
+access_classes,access.classes,model_classes,,1,1,1,1
+access_coaching_center_subject,access.coaching.center.subject,model_coaching_center_subject,,1,1,1,1
+access_coaching_center_day,access.coaching.center.day,model_coaching_center_day,,1,1,1,1

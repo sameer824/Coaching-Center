@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <record id="view_coaching_dashboard" model="ir.ui.view">
+            <field name="name">coaching.dashboard</field>
+            <field name="model">coaching.dashboard</field>
+            <field name="arch" type="xml">
+                <form>
+                
+                    <sheet>
+                        <group>
+                            <field name="total_students"/>
+                            <field name="total_classes"/>
+                            <field name="total_teachers"/>
+                            <!-- Add more fields as needed -->
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_coaching_dashboard_tree" model="ir.ui.view">
+            <field name="name">coaching.dashboard.tree</field>
+            <field name="model">coaching.dashboard</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <!-- Columns in the Tree View -->
+                            <field name="total_students"/>
+                            <field name="total_classes"/>
+                            <field name="total_teachers"/>
+                            <!-- Add more fields as needed -->
+                </tree>
+            </field>
+        </record>
+    <record id="coaching_dashboard_action" model="ir.actions.act_window">
+        <field name="name">Dashboard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">coaching.dashboard</field>  
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Coaching Dashboard!
+            </p>
+        </field>
+    </record>
+    <!-- <menuitem id="coaching_dashboard_root" name="Dashboard" parent="coaching_root" action="coaching_dashboard_action" sequence="10"/> -->
+
+
+
+</odoo>

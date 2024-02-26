@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding="utf-8"?>
+<odoo>
+<record id="coaching_courses_form" model="ir.ui.view">
+    <field name="name">coaching.courses.form</field>
+    <field name="model">coaching.courses</field>
+    <field name="arch" type="xml">
+        <form>
+            <header>
+                <button id="button_confirm" name="action_confirm" string="Confirm" class="btn-primary" type="object" states="draft" confirm="Are you okay to go with these changes"/>
+                <button id="button_open" name="action_open" type="object" string="In Progress" class="btn-primary" states="open"/>
+                <button id="button_draft" name="action_draft" type="object" string="Draft" class="btn-primary" confirm="Are you sure you want to change the state to Draft"/>
+                <button id="button_delete" name="action_delete" type="object" string="Deleted" states="draft,open" confirm="Are you sure you want to delete this record"/>
+                <field name="state" widget="statusbar" statusbar_visible="draft,open,confirm"/>
+            </header>           
+            <sheet>                        
+                <group>
+                    <group>
+                        <field name="course_name"/>
+                        <field name="teacher_id" />
+                        <field name="note"/>
+                    </group>
+                    <group>
+                        <field name="free" />
+                        <field name="course_start_date" />
+                        <field name="course_end_date" />
+                    </group>       
+
+                </group>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids"/>
+                <field name="activity_ids"/>
+                <field name="message_ids"/>
+            </div>
+        </form>
+    </field>
+</record>
+
+<record id="coaching_courses_tree" model="ir.ui.view">
+    <field name="name">coaching.courses.tree</field>
+    <field name="model">coaching.courses</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="course_name"/>
+            <field name="teacher_id" />
+            <!-- <field name="note"/> -->
+            <field name="course_start_date" />
+            <field name="course_end_date" />
+            <field name="free" />
+        </tree>
+    </field>
+</record>
+
+<record id="view_coaching_courses_search" model="ir.ui.view">
+    <field name="name">coaching.courses.search</field>
+    <field name="model">coaching.courses</field>
+    <field name="arch" type="xml">
+        <search>
+        </search>
+        
+    </field>
+</record>
+<record id="coaching_courses_kanban_view" model="ir.ui.view">
+    <field name="name">coaching.courses.kanban</field>
+    <field name="model">coaching.courses</field>
+    <field name="arch" type="xml">
+        <kanban>
+            <field name="course_name"/>
+            <field name="teacher_id" />
+            <!-- <field name="note"/> -->
+            <field name="course_start_date" />
+            <field name="course_end_date" />
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                        <!-- <div class="o_kanban_image_fill_left d-none d-md-block">
+                            <field name="student_image" widget="image" class="oe_avatar" style="max-width: 50%; position: absolute; top: 0; left: 0;"/>
+                        </div> -->
+            
+                        <div class="oe_kanban_details d-flex flex-column justify-content-between">
+                            <div>
+                                <strong class="o_kanban_record_title oe_partner_heading">
+                                    <!-- Student Record   -->
+                                        
+                                </strong>
+                                <ul>
+                                    <li>
+                                        <li>Course Name:<field name="course_name"/></li>
+                                        <li>Avaiable Teacher:<field name="teacher_id"/></li>
+                                        <li>Start Date:<field name="course_start_date"/></li>
+                                        <li>End Date:<field name="course_end_date"/></li>
+                                    </li>
+
+                                </ul>
+                            </div>
+            
+                            <div class="o_kanban_record_bottom">
+                                <div class="oe_kanban_bottom_left"/>
+                                <div class="oe_kanban_bottom_right"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
+
+<record id="coaching_courses_action" model="ir.actions.act_window">
+    <field name="name">Courses</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">coaching.courses</field>
+    <field name="view_mode">tree,kanban,form</field>
+    <field name="context">{}</field>
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+            Add your First Course!
+        </p>
+    </field>
+</record>
+
+<!-- <menuitem id="main_menu" name="Main Menu" sequence="10" />
+
+<menuitem id="submenu1" name="Submenu 1" parent="main_menu" action="submenu1_action" sequence="10" />
+<menuitem id="submenu2" name="Submenu 2" parent="main_menu" action="submenu2_action" sequence="20" />
+<menuitem id="submenu3" name="Submenu 3" parent="main_menu" action="submenu3_action" sequence="30" /> -->
+
+<menuitem id="coaching_courses_root" name="Courses" parent="coaching_root" sequence="30"/>
+<menuitem id="submenu_coaching_courses_root" name="All Coures" parent="coaching_courses_root" action="coaching_courses_action" sequence="30"/>
+<menuitem id="classes_root" name="Classes" parent="coaching_courses_root" action="classes_action" sequence="40"/>
+
+</odoo>
